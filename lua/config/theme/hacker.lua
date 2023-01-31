@@ -56,8 +56,8 @@ H.setup = function()
     hl(0, 'Directory', { fg = P.colors.grayish_blue, bg = H.__no_color })
     -- popup menu
     hl(0, 'Pmenu', { fg = P.colors.light_blue, bg = P.colors.dark_grayish_blue })
-    hl(0, 'PmenuSel', { fg = P.colors.light_blue, bg = P.colors.deep_blue })
-    hl(0, 'PmenuSbar', { fg = P.colors.light_blue, bg = P.colors.deep_blue })
+    hl(0, 'PmenuSel', { fg = H.__no_color, bg = H.bg_normal_dark })
+    hl(0, 'PmenuSbar', { fg = P.colors.light_blue, bg = H.bg_normal_dark })
     hl(0, 'PmenuThumb', { fg = P.colors.light_blue, bg = P.colors.strong_grayish_blue })
     -- /////////////////////////////////////////////////////////////////
     -- syntax groups (start) (refer to ':h group-name')
@@ -325,7 +325,20 @@ H.setup = function()
     hl(0, "NvimTreeRootFolder", { fg = P.colors.light_blue, bg = H.__no_color, bold = true, })
     hl(0, "NvimTreeExecFile", { fg = P.colors.strong_lime_green, bg = H.__no_color, })
 
-    --Gitsigns
+    -- NvimCmp
+    hl(0, "CmpItemAbbr", { fg = P.colors.light_blue, bg = H.__no_color, })
+    hl(0, "CmpItemAbbrDeprecated", { fg = P.colors.strong_gray, bg = H.__no_color, })
+    hl(0, "CmpItemAbbrMatch", { fg = P.colors.light_grayish_blue, bg = H.__no_color, })
+    hl(0, "CmpItemAbbrMatchFuzzy", { fg = P.colors.light_grayish_green, bg = H.__no_color, })
+    hl(0, "CmpItemKind", { fg = P.colors.light_lime_green, bg = H.__no_color, })
+    hl(0, "CmpItemKindEnum", { fg = P.colors.light_grayish_red, bg = H.__no_color, })
+    hl(0, "CmpItemKindVariable", { fg = P.colors.light_cyan, bg = H.__no_color, })
+    hl(0, "CmpItemKindMethod", { fg = P.colors.pale_violet, bg = H.__no_color, })
+    hl(0, "CmpItemKindModule", { fg = P.colors.pale_orange, bg = H.__no_color, })
+    hl(0, "CmpItemKindInterface", { fg = P.colors.light_violet, bg = H.__no_color, })
+    hl(0, "CmpItemMenu", { fg = P.colors.light_orange, bg = H.__no_color, })
+
+    -- Gitsigns
     hl(0, "GitSignsCurrentLineBlame", { link = 'SpecialComment' })
 end
 

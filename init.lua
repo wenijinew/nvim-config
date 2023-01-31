@@ -24,5 +24,3 @@ require('setup.nvimtree').setup()
 require('setup.nvimcmp').setup()
 -- require('setup.coc').setup()
 require('setup.colorizer').setup()
-
---require('miv')
