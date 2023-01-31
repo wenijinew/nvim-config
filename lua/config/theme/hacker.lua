@@ -5,7 +5,7 @@ H.__no_color = 'NONE'
 
 -- properties could be override by other module
 H.fg_normal = P.colors.pale_blue
-H.bg_normal = P.colors.deep_grayish_blue
+H.bg_normal = P.colors.black_grayish_blue
 H.fg_normal_dark = P.colors.grayish_blue
 H.bg_normal_dark = P.colors.black_grayish_blue
 H.fg_highlight = P.colors.light_yellow

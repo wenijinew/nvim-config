@@ -173,6 +173,7 @@ local configuration = {
             o = { "<cmd>copen<cr>", "Open QuickFix Window" },
             O = { "<cmd>lopen<cr>", "Open Location List" },
             p = { "<cmd>lprev<cr>", "Previous item in Location List" },
+            H = { "<cmd>colorscheme hacker_default<cr>", "Use hacker-default theme" },
             i = { "<cmd>luafile <afile><cr>", "Source current file" },
             I = { "<cmd>luafile $home/.config/nvim/init.lua<cr>", "Source init.lua" },
             s = { "<cmd>split<cr>", "Horizontal split" },
