@@ -3,6 +3,7 @@ local P = {}
 P.colors = {
     white                     = '#efefef',
     black                     = '#080808',
+    cursor                    = '#ffd700',
     --
     pale_gray                 = '#eaeaea',
     light_gray                = '#d0d0d0',
