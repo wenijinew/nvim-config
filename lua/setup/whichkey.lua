@@ -113,7 +113,8 @@ local configuration = {
                 vim.cmd("mks! " .. vim.v.this_session)
             end, "Save session" },
             b = { "<cmd>NvimTreeOpen $DJ_REPO_ROOT<cr>", "Open user development repositories" },
-            c = { "<cmd>tabc<cr>", "Close the current tab" },
+            c = { "<cmd>wc<cr>", "Close the current tab" },
+            C = { "<cmd>tabc<cr>", "Close the current tab" },
             d = { "<cmd>w<cr> <cmd>bd<cr>", "Delete the current buffer" },
             D = { "<cmd>bd!<cr>", "Forcely delete the current buffer" },
             e = { "<cmd>NvimTreeFindFileToggle<cr>", "Open/Close Nvimtree" },
