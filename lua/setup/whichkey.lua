@@ -113,7 +113,7 @@ local configuration = {
                 vim.cmd("mks! " .. vim.v.this_session)
             end, "Save session" },
             b = { "<cmd>NvimTreeOpen $DJ_REPO_ROOT<cr>", "Open user development repositories" },
-            c = { "<cmd>wc<cr>", "Close the current tab" },
+            c = { "<c-w>c", "Close the current window" },
             C = { "<cmd>tabc<cr>", "Close the current tab" },
             d = { "<cmd>w<cr> <cmd>bd<cr>", "Delete the current buffer" },
             D = { "<cmd>bd!<cr>", "Forcely delete the current buffer" },
@@ -121,6 +121,7 @@ local configuration = {
             f = { "<cmd>PymodeLintAuto<cr>", "AutoFix PEP8 Errors(Pymode)" },
             i = { "<cmd>IndentBlanklineToggle<cr>", "Toggles Indent-Blankline" },
             p = { "<cmd>PymodeLint<cr>", "Run code check(Pymode)" },
+            l = { "<cmd>SymbolsOutline<cr>", "Show/Hide SymbolsOutline" },
             m = { "<cmd>vi $home/.vimrc<cr> <cmd>split<cr> <cmd>vi $home/.vim/colors/hacker.vim<cr> <cmd>split<cr> <cmd>vi $home/.config/nvim/init.lua<cr>",
                 "Modify init files" },
             n = { "<cmd>set nonu<cr> <cmd>set nornu<cr>", "No number" },
