@@ -48,9 +48,17 @@ local configuration = {
             },
             h = { "<cmd>Telescope help_tags<cr>", "Find Nvim Helps" },
             i = { "<cmd>Telescope highlights<cr>", "Find Highlights" },
+            j = { function()
+                require("setup.telescope").find_mje_jcat_files()
+            end, "Find MJE/JCAT/Test Repo Files"
+            },
             k = { "<cmd>Telescope keymaps<cr>", "Find Keymaps" },
             l = { "<cmd>Telescope live_grep<cr>", "Find Files by Grep Text" },
             m = { "<cmd>Telescope man_pages<cr>", "Find Man Pages" },
+            o = { function()
+                require("setup.telescope").find_own_projects_files()
+            end, "Find Own Project Files"
+            },
             r = { "<cmd>Telescope oldfiles<cr>", "Find Recent Files" },
             t = { function()
                 require("setup.telescope").find_tag_files()

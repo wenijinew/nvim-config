@@ -48,6 +48,60 @@ function M.find_github_repo_files(opts)
     builtin.find_files(opts)
 end
 
+function M.find_own_projects_files(opts)
+    opts = opts or {}
+    local theme_opts = themes.get_ivy {
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal";
+        prompt_prefix = icons.ui.Telescope .. " ",
+        prompt_title = "~ Own Repo Files ~",
+        cwd = vim.call("stdpath", "data"),
+        search_dirs = {
+            "$GITHUB_REPO_ROOT/redwood",
+            "$GITHUB_REPO_ROOT/nvim-config",
+            "$DJ_REPO_ROOT/mllp",
+            "$GITHUB_REPO_ROOT/emacs-config"
+        },
+        layout_config = {
+            height = 0.6,
+            width = 0.8,
+            preview_cutoff = 120,
+        },
+        borderchars = {
+            "─", "│", "─", "│", "╭", "╮", "╯", "╰"
+        },
+    }
+    opts = vim.tbl_deep_extend("force", theme_opts, opts)
+    builtin.find_files(opts)
+end
+
+function M.find_mje_jcat_files(opts)
+    opts = opts or {}
+    local theme_opts = themes.get_ivy {
+        sorting_strategy = "ascending",
+        layout_strategy = "horizontal";
+        prompt_prefix = icons.ui.Telescope .. " ",
+        prompt_title = "~ MJE/JCAT/Test Repo Files ~",
+        cwd = vim.call("stdpath", "data"),
+        search_dirs = {
+            "$DJ_REPO_ROOT/mje",
+            "$DJ_REPO_ROOT/jcat_fw",
+            "$DJ_REPO_ROOT/ran-common-test",
+            "$DJ_REPO_ROOT/stp_cfg",
+        },
+        layout_config = {
+            height = 0.6,
+            width = 0.8,
+            preview_cutoff = 120,
+        },
+        borderchars = {
+            "─", "│", "─", "│", "╭", "╮", "╯", "╰"
+        },
+    }
+    opts = vim.tbl_deep_extend("force", theme_opts, opts)
+    builtin.find_files(opts)
+end
+
 function M.find_workspace_files(opts)
     opts = opts or {}
     local theme_opts = themes.get_ivy {
