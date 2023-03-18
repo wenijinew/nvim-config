@@ -62,7 +62,9 @@ return require('packer').startup(function(use)
         }
     }
     -- java outliner
-    use { 'simrat39/symbols-outline.nvim' }
+    use {
+        'simrat39/symbols-outline.nvim',
+    }
     -- highlighting
     use {
         "wenijinew/nvim-treesitter",

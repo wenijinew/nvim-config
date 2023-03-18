@@ -195,8 +195,9 @@ _G.packer_plugins = {
     url = "https://github.com/Tastyep/structlog.nvim"
   },
   ["symbols-outline.nvim"] = {
-    loaded = true,
-    path = "/home/egugwen/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
+    loaded = false,
+    needs_bufread = false,
+    path = "/home/egugwen/.local/share/nvim/site/pack/packer/opt/symbols-outline.nvim",
     url = "https://github.com/simrat39/symbols-outline.nvim"
   },
   ["telescope.nvim"] = {
