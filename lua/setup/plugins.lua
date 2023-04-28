@@ -74,4 +74,6 @@ return require('packer').startup(function(use)
     }
     -- logging
     use { "Tastyep/structlog.nvim" }
+    -- term
+    use { "voldikss/vim-floaterm" }
 end)
