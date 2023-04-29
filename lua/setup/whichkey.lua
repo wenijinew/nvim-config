@@ -178,6 +178,7 @@ local configuration = {
             D = { "<cmd>colorscheme hacker_daytime<cr>", "Use hacker-daytime theme" },
             f = { "<cmd>lua vim.diagnostic.goto_prev()<cr>" },
             F = { "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<cr>" },
+            l = { "<cmd>FloatermNew lazygit<cr>", "Open lazygit in new Flowterm" },
             n = { "<cmd>lnext<cr>", "Next item in Location List" },
             N = { "<cmd>colorscheme hacker_night<cr>", "Use hacker-night theme" },
             o = { "<cmd>copen<cr>", "Open QuickFix Window" },
