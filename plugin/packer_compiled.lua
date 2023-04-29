@@ -209,6 +209,11 @@ _G.packer_plugins = {
     path = "/home/egugwen/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/home/egugwen/.local/share/nvim/site/pack/packer/start/vim-floaterm",
+    url = "https://github.com/voldikss/vim-floaterm"
+  },
   ["vim-gitgutter"] = {
     loaded = true,
     path = "/home/egugwen/.local/share/nvim/site/pack/packer/start/vim-gitgutter",
