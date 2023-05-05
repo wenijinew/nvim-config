@@ -13,7 +13,7 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +181 /repo/egugwen/github/nvim-config/lua/setup/whichkey.lua
+badd +184 /repo/egugwen/github/nvim-config/lua/setup/whichkey.lua
 argglobal
 %argdel
 edit /repo/egugwen/github/nvim-config/lua/setup/whichkey.lua
@@ -28,13 +28,14 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 181 - ((36 * winheight(0) + 36) / 73)
+let s:l = 184 - ((36 * winheight(0) + 36) / 73)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 181
-normal! 028|
+keepjumps 184
+normal! 013|
 lcd /repo/egugwen/github/nvim-config/lua/setup
+if exists(':tcd') == 2 | tcd /repo/egugwen/github/nvim-config/lua/setup | endif
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
