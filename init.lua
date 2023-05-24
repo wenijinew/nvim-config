@@ -13,6 +13,8 @@ require('config.keymaps').setup()
 require('config.theme.hacker').setup()
 
 require("setup.plugins")
+require("mason").setup()
+require("mason-lspconfig").setup()
 require("setup.lsp").setup()
 require("setup.outline").setup()
 require("setup.gitsigns").setup()

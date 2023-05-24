@@ -58,7 +58,8 @@ return require('packer').startup(function(use)
         tag = 'v0.1.4',
         requires = {
             "williamboman/nvim-lsp-installer",
-            "williamboman/mason.nvim"
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim"
         }
     }
     -- java outliner

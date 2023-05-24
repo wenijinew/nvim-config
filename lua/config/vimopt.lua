@@ -112,10 +112,6 @@ local autocmds_definitions = {
                         end
                     end
                 }
-                vim.cmd [[
-                retab
-                %s/ *$//g
-                ]]
             end,
         }
     },
@@ -123,12 +119,13 @@ local autocmds_definitions = {
         "BufWritePre",
         {
             group = "_auto_format_on_save",
-            pattern = { "*.sh" },
+            pattern = { "*" },
             desc = "Automatically format on saving",
             callback = function()
                 vim.cmd [[
                 retab
                 %s/ *$//g
+                execute "normal \<C-O>"
                 ]]
             end,
         }
