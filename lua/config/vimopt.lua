@@ -91,7 +91,7 @@ local autocmds_definitions = {
         "BufWritePre",
         {
             group = "_auto_format_on_save",
-            pattern = "*",
+            pattern = { "*.lua", "*.py", "*.java" },
             desc = "Automatically format on saving",
             callback = function()
                 vim.lsp.buf.format {
@@ -112,6 +112,24 @@ local autocmds_definitions = {
                         end
                     end
                 }
+                vim.cmd [[
+                retab
+                %s/ *$//g
+                ]]
+            end,
+        }
+    },
+    {
+        "BufWritePre",
+        {
+            group = "_auto_format_on_save",
+            pattern = { "*.sh" },
+            desc = "Automatically format on saving",
+            callback = function()
+                vim.cmd [[
+                retab
+                %s/ *$//g
+                ]]
             end,
         }
     },

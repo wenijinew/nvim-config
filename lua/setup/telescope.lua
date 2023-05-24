@@ -12,7 +12,7 @@ function M.find_product_repo_files(opts)
         prompt_prefix = icons.ui.Telescope .. " ",
         prompt_title = "~ Product Repo Files ~",
         cwd = vim.call("stdpath", "data"),
-        search_dirs = { "$DJ_REPO_ROOT" },
+        search_dirs = { "$DJ_REPO_ROOT/rensa2", "$DJ_REPO_ROOT/f-fan" },
         layout_config = {
             height = 0.6,
             width = 0.8,

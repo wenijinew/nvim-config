@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+env python ${GITHUB_REPO_ROOT}/ranger/ranger.py

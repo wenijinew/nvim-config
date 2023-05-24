@@ -184,6 +184,7 @@ local configuration = {
             o = { "<cmd>copen<cr>", "Open QuickFix Window" },
             O = { "<cmd>lopen<cr>", "Open Location List" },
             p = { "<cmd>lprev<cr>", "Previous item in Location List" },
+            r = { "<cmd>FloatermNew ranger<cr>", "Open ranger in new Flowterm" },
             H = { "<cmd>colorscheme hacker_default<cr>", "Use hacker-default theme" },
             i = { "<cmd>luafile <afile><cr>", "Source current file" },
             I = { "<cmd>luafile $home/.config/nvim/init.lua<cr>", "Source init.lua" },
