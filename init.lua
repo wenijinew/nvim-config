@@ -13,9 +13,44 @@ require('config.keymaps').setup()
 require('config.theme.hacker').setup()
 
 require("setup.plugins")
-require("mason").setup()
-require("mason-lspconfig").setup()
+-- due to proxy issue, masan cannot work
+--require("mason").setup()
+--require("mason-lspconfig").setup
+--{
+--    ensure_installed = { "pylsp" },
+--    automatic_installation = true,
+--    log_level = vim.log.levels.DEBUG
+--}
 require("setup.lsp").setup()
+-- require("lspconfig").pylsp.setup {
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 pyflakes = {
+--                     enabled = true,
+--                 },
+--                 yapf = {
+--                     enabled = true,
+--                 },
+--                 pycodestyle = {
+--                     enabled = true,
+--                     ignore = { 'W391' },
+--                     maxLineLength = 100
+--                 },
+--                 pylint = {
+--                     enabled = true
+--                 },
+--                 flake8 = {
+--                     enabled = true,
+--                     config = os.getenv("HOME") .. "/.config/flake8"
+--                 },
+--                 autopep8 = {
+--                     enabled = true
+--                 }
+--             }
+--         }
+--     }
+-- }
 require("setup.outline").setup()
 require("setup.gitsigns").setup()
 require('setup.whichkey').setup()

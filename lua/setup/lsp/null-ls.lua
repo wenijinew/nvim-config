@@ -109,7 +109,7 @@ M.configuration = {
         --- enable completion triggered by <c-x><c-o>
         omnifunc = "v:lua.vim.lsp.omnifunc",
         --- use gq for formatting
-        formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:500})",
+        formatexpr = "v:lua.vim.lsp.formatexpr(#{timeout_ms:499})",
     },
 }
 
@@ -150,10 +150,10 @@ function M.setup()
         sources = {
             -- python formatting (install black by pip)
             null_ls.builtins.formatting.black.with({ extra_args = { "--fast" } }),
-            -- python diagnostics
-            null_ls.builtins.diagnostics.flake8.with({
-                diagnostics_format = "[#{c}] #{m} (#{s})",
-            }),
+            -- python diagnostics (when pylsp is enabled, this is not needed)
+            -- null_ls.builtins.diagnostics.flake8.with({
+            --    diagnostics_format = "[#{c}] #{m} (#{s})",
+            -- }),
             -- java formatting (check $WS_REPO_ROOT/bin/google_java_format)
             null_ls.builtins.formatting.google_java_format,
         },

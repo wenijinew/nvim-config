@@ -26,7 +26,8 @@ local log = require('utils.log')
 -- https://download.eclipse.org/jdtls/snapshots/?d
 local servers = {
     jdtls = {},
-    sumneko_lua = {}
+    sumneko_lua = {},
+    pylsp = {}
 }
 
 function M.setup_document_symbols(client, bufnr)
@@ -61,6 +62,13 @@ local opts = {
                 globals = { "vim" },
             },
         },
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = { "E501" }
+                }
+            }
+        }
     },
 }
 
