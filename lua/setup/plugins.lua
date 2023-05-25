@@ -49,7 +49,7 @@ return require('packer').startup(function(use)
         }
     }
     -- language servers
-    -- use { 'wenijinew/python-mode', branch = 'e463652c' }
+    use { 'wenijinew/python-mode', branch = 'e463652c' }
     use { 'jose-elias-alvarez/null-ls.nvim' }
     use { 'folke/trouble.nvim' }
     use {

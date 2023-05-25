@@ -17,7 +17,7 @@ function M.setup()
     keymap("n", "<M-n>", ":bnext<cr>", opts)
     keymap("n", "<M-m>", ":bprevious<cr>", opts)
     keymap("n", "<C-l>", ":tabe<cr>", opts)
-    keymap("n", "<Enter>", ":tabn<cr>", opts)
+    keymap("n", "<C-m>", ":tabn<cr>", opts)
     -- save session and quit
     keymap("n", "<Leader>sS", "<cmd>lua vim.fn.save_session<cr>", opts)
     -- diagnostics navigation
