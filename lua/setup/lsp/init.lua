@@ -66,6 +66,13 @@ local opts = {
             plugins = {
                 pycodestyle = {
                     ignore = { "E501" }
+                },
+                pylint = {
+                    enabled = true
+                },
+                flake8 = {
+                    enabled = true,
+                    ignore = { "W503" }
                 }
             }
         }
