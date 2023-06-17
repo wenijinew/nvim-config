@@ -68,7 +68,8 @@ local opts = {
                     ignore = { "E501" }
                 },
                 pylint = {
-                    enabled = true
+                    enabled = true,
+                    args = { "--msg-template={msg_id}:{msg}" }
                 },
                 flake8 = {
                     enabled = true,

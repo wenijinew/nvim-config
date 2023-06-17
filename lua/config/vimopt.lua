@@ -119,7 +119,7 @@ local autocmds_definitions = {
         "BufWritePre",
         {
             group = "_auto_format_on_save",
-            pattern = { "*" },
+            pattern = { "*.java" },
             desc = "Automatically format on saving",
             callback = function()
                 vim.cmd [[
@@ -302,6 +302,30 @@ function M.setup()
     -- signs
     -- ////////////////////////////////////////////////////
     _create_signs()
+    -- ////////////////////////////////////////////////////
+    -- diagnostics customization
+    -- ////////////////////////////////////////////////////
+    vim.diagnostic.config({
+        virtual_text = {
+            --            prefix = function(diagnostic)
+            --                if diagnostic.severity == vim.diagnostic.severity.ERROR then
+            --                    return icons.diagnostics.Error
+            --                elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+            --                    return icons.diagnostics.Warning
+            --                elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+            --                    return icons.diagnostics.Information
+            --                elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+            --                    return icons.diagnostics.Hint
+            --                else
+            --                    return icons.diagnostics.Trace
+            --                end
+            --            end,
+            prefix = icons.diagnostics.Debug,
+            format = function(diagnostic)
+                return string.format("%s: %s", diagnostic.code, diagnostic.message)
+            end,
+        }
+    })
 end
 
 return M
