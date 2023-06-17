@@ -3,7 +3,7 @@ local icons = require('config.icons')
 
 -- good designed code to create autocmds by given 'table'
 -- borrowed from lunarvim
-local function define_autocmds(definitions)
+local function _define_autocmds(definitions)
     for _, entry in ipairs(definitions) do
         local event = entry[1]
         local opts = entry[2]
@@ -190,6 +190,9 @@ local autocmds_definitions = {
     --},
 }
 
+-- define diagnostics signs for default diagnostics names and python-mode
+-- diagnostics names.
+-- it's used in the function _create_signs
 local diagnostics_signs = {
     { name = "DiagnosticSignError", text = icons.diagnostics.Error },
     { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
@@ -215,6 +218,7 @@ local function _create_signs()
             numhl = sign.name,
         })
     end
+    -- set python-mode symbols
     vim.g.pymode_lint_todo_symbol = icons.diagnostics.Warning
     vim.g.pymode_lint_docs_symbol = icons.ui.Note
     vim.g.pymode_lint_comment_symbol = icons.diagnostics.Warning
@@ -224,7 +228,71 @@ local function _create_signs()
     vim.g.pymode_lint_pyflakes_symbol = icons.diagnostics.BoldInformation
 end
 
-function M.setup()
+local function _show_highest_severity_diagnostics()
+    local ns = vim.api.nvim_create_namespace("b.w")
+    local orig_signs_handler = vim.diagnostic.handlers.signs
+    local orig_virtual_text_handler = vim.diagnostic.handlers.virtual_text
+    vim.diagnostic.handlers.signs = {
+        show = function(_, bufnr, diagnostics, opts)
+            local highest_severities = {}
+            for _, d in pairs(diagnostics) do
+                local h = highest_severities[d.lnum]
+                -- higher priority has smaller int value
+                if not h or d.severity < h.severity then
+                    highest_severities[d.lnum] = d
+                end
+            end
+            local highest_severities_diagnostics = vim.tbl_values(highest_severities)
+            orig_signs_handler.show(ns, bufnr, highest_severities_diagnostics, opts)
+        end,
+        hide = function(_, bufnr)
+            orig_signs_handler.hide(ns, bufnr)
+        end
+    }
+    vim.diagnostic.handlers.virtual_text = {
+        show = function(_, bufnr, diagnostics, opts)
+            local highest_severities = {}
+            for _, d in pairs(diagnostics) do
+                local h = highest_severities[d.lnum]
+                if not h or d.severity < h.severity then
+                    highest_severities[d.lnum] = d
+                end
+            end
+            local highest_severities_diagnostics = vim.tbl_values(highest_severities)
+            orig_virtual_text_handler.show(ns, bufnr, highest_severities_diagnostics, opts)
+        end,
+        hide = function(_, bufnr)
+            orig_virtual_text_handler.hide(ns, bufnr)
+        end
+    }
+end
+
+local function _config_diagnostics()
+    vim.diagnostic.config({
+        virtual_text = {
+            --prefix = function(diagnostic)
+            --    if diagnostic.severity == vim.diagnostic.severity.ERROR then
+            --        return icons.diagnostics.Error
+            --    elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+            --        return icons.diagnostics.Warning
+            --    elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+            --        return icons.diagnostics.Information
+            --    elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+            --        return icons.diagnostics.Hint
+            --    else
+            --        return icons.diagnostics.Trace
+            --    end
+            --end,
+            prefix = icons.misc.Dot,
+            format = function(diagnostic)
+                return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.ui.Close,
+                    diagnostic.message)
+            end,
+        }
+    })
+end
+
+local function _set_opts()
     -- ////////////////////////////////////////////////////
     -- generic options
     -- showtabline = 2: always show tab as breadcrumbs needs it
@@ -241,7 +309,7 @@ function M.setup()
     vim.opt.number = true
     vim.opt.relativenumber = true
     vim.opt.shiftwidth = 4
-    vim.opt.signcolumn = 'yes:2'
+    vim.opt.signcolumn = 'yes:1'
     vim.opt.showtabline = 2
     vim.opt.laststatus = 3
     vim.opt.tabstop = 4
@@ -293,11 +361,14 @@ function M.setup()
     -- nvim-tree
     vim.g.loaded_netrw = 0
     vim.g.loaded_netrwPlugin = 0
+end
 
+function M.setup()
+    _set_opts()
     -- ////////////////////////////////////////////////////
     -- autocmds
     -- ////////////////////////////////////////////////////
-    define_autocmds(autocmds_definitions)
+    _define_autocmds(autocmds_definitions)
     -- ////////////////////////////////////////////////////
     -- signs
     -- ////////////////////////////////////////////////////
@@ -305,28 +376,8 @@ function M.setup()
     -- ////////////////////////////////////////////////////
     -- diagnostics customization
     -- ////////////////////////////////////////////////////
-    vim.diagnostic.config({
-        virtual_text = {
-            --prefix = function(diagnostic)
-            --    if diagnostic.severity == vim.diagnostic.severity.ERROR then
-            --        return icons.diagnostics.Error
-            --    elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-            --        return icons.diagnostics.Warning
-            --    elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-            --        return icons.diagnostics.Information
-            --    elseif diagnostic.severity == vim.diagnostic.severity.HINT then
-            --        return icons.diagnostics.Hint
-            --    else
-            --        return icons.diagnostics.Trace
-            --    end
-            --end,
-            prefix = icons.misc.Dot,
-            format = function(diagnostic)
-                return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.ui.Close,
-                    diagnostic.message)
-            end,
-        }
-    })
+    _config_diagnostics()
+    _show_highest_severity_diagnostics()
 end
 
 return M

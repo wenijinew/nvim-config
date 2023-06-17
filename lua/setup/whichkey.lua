@@ -29,6 +29,32 @@ local configuration = {
     },
 
     mappings = {
+        a = {
+            name = "Test",
+            a = { function()
+                local key_maps = vim.api.nvim_get_keymap("n")
+                key_maps = vim.diagnostic.get_namespaces()
+                local bufnr = vim.api.nvim_create_buf(true, false)
+                local keymaps_string = "keys: "
+                for _, v in ipairs(key_maps) do
+                    keymaps_string = keymaps_string .. table.concat(v, ",")
+                end
+
+                local items = {}
+                for k, v in pairs(key_maps) do
+                    if type(v) == "string" then
+                        keymaps_string = keymaps_string .. k .. "=" .. v
+                    elseif type(v) == "table" then
+                        for kk, vv in pairs(v) do
+                            table.insert(items, kk .. "=" .. tostring(vv))
+                            keymaps_string = keymaps_string .. k .. "=" .. kk .. "=" .. tostring(vv) .. "   \n"
+                        end
+                    end
+                end
+                vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, items)
+                vim.api.nvim_set_current_buf(bufnr)
+            end, "Show Keymaps" }
+        },
         f = {
             name = "Telescope",
             a = { "<cmd>Telescope buffers<cr>", "Find Buffers" },
@@ -130,6 +156,7 @@ local configuration = {
             i = { "<cmd>IndentBlanklineToggle<cr>", "Toggles Indent-Blankline" },
             p = { "<cmd>PymodeLint<cr>", "Run code check(Pymode)" },
             l = { "<cmd>SymbolsOutline<cr>", "Show/Hide SymbolsOutline" },
+            L = { "<cmd>lua vim.diagnostic.setloclist()<cr>", "Show diagnostic list in location list." },
             m = { "<cmd>vi $home/.vimrc<cr> <cmd>split<cr> <cmd>vi $home/.vim/colors/hacker.vim<cr> <cmd>split<cr> <cmd>vi $home/.config/nvim/init.lua<cr>",
                 "Modify init files" },
             n = { "<cmd>set nonu<cr> <cmd>set nornu<cr>", "No number" },
@@ -189,6 +216,7 @@ local configuration = {
             i = { "<cmd>luafile <afile><cr>", "Source current file" },
             I = { "<cmd>luafile $home/.config/nvim/init.lua<cr>", "Source init.lua" },
             s = { "<cmd>split<cr>", "Horizontal split" },
+            t = { "<cmd>TroubleToggle<cr>", "Trouble Toggle" },
             v = { "<cmd>vsplit<cr>", "Vertical split" },
             -- reserved for session loading
             -- TODO: show session name in status line - change lualine config

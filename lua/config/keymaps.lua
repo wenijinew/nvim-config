@@ -18,8 +18,6 @@ function M.setup()
     keymap("n", "<M-m>", ":bprevious<cr>", opts)
     keymap("n", "<C-l>", ":tabe<cr>", opts)
     keymap("n", "<C-m>", ":tabn<cr>", opts)
-    -- save session and quit
-    keymap("n", "<Leader>sS", "<cmd>lua vim.fn.save_session<cr>", opts)
     -- diagnostics navigation
     keymap("n", "<Leader>sb", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<cr>", opts)
     keymap("n", "<Leader>sf", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<cr>", opts)
