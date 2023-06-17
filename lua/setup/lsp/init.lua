@@ -65,15 +65,23 @@ local opts = {
         pylsp = {
             plugins = {
                 pycodestyle = {
-                    ignore = { "E501" }
+                    enabled = true
+                },
+                rope_autoimport = {
+                    enabled = true,
+                },
+                pyflakes = {
+                    enabled = true,
                 },
                 pylint = {
                     enabled = true,
-                    args = { "--msg-template={msg_id}:{msg}" }
                 },
                 flake8 = {
                     enabled = true,
-                    ignore = { "W503" }
+                    config = os.getenv("HOME") .. "/.config/flake8"
+                },
+                mccabe = {
+                    enabled = true,
                 }
             }
         }

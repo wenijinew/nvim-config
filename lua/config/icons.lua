@@ -150,6 +150,7 @@ return {
         Smiley = "ﲃ",
         Package = "",
         CircuitBoard = "",
+        Dot = "",
     },
     os = {
         Linux = "",

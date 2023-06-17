@@ -307,22 +307,23 @@ function M.setup()
     -- ////////////////////////////////////////////////////
     vim.diagnostic.config({
         virtual_text = {
-            --            prefix = function(diagnostic)
-            --                if diagnostic.severity == vim.diagnostic.severity.ERROR then
-            --                    return icons.diagnostics.Error
-            --                elseif diagnostic.severity == vim.diagnostic.severity.WARN then
-            --                    return icons.diagnostics.Warning
-            --                elseif diagnostic.severity == vim.diagnostic.severity.INFO then
-            --                    return icons.diagnostics.Information
-            --                elseif diagnostic.severity == vim.diagnostic.severity.HINT then
-            --                    return icons.diagnostics.Hint
-            --                else
-            --                    return icons.diagnostics.Trace
-            --                end
-            --            end,
-            prefix = icons.diagnostics.Debug,
+            --prefix = function(diagnostic)
+            --    if diagnostic.severity == vim.diagnostic.severity.ERROR then
+            --        return icons.diagnostics.Error
+            --    elseif diagnostic.severity == vim.diagnostic.severity.WARN then
+            --        return icons.diagnostics.Warning
+            --    elseif diagnostic.severity == vim.diagnostic.severity.INFO then
+            --        return icons.diagnostics.Information
+            --    elseif diagnostic.severity == vim.diagnostic.severity.HINT then
+            --        return icons.diagnostics.Hint
+            --    else
+            --        return icons.diagnostics.Trace
+            --    end
+            --end,
+            prefix = icons.misc.Dot,
             format = function(diagnostic)
-                return string.format("%s: %s", diagnostic.code, diagnostic.message)
+                return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.ui.Close,
+                    diagnostic.message)
             end,
         }
     })
