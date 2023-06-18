@@ -158,6 +158,8 @@ function M.setup()
             null_ls.builtins.formatting.google_java_format,
             null_ls.builtins.formatting.beautysh,
             null_ls.builtins.formatting.isort,
+            null_ls.builtins.formatting.yamlfix,
+            null_ls.builtins.formatting.yamlfmt,
         },
     })
 end

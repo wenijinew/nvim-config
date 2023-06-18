@@ -1,5 +1,6 @@
 local M = {}
 local icons = require('config.icons')
+local log = require('utils.log')
 
 -- good designed code to create autocmds by given 'table'
 -- borrowed from lunarvim
@@ -254,8 +255,12 @@ local function _show_highest_severity_diagnostics()
             local highest_severities = {}
             for _, d in pairs(diagnostics) do
                 local h = highest_severities[d.lnum]
+                -- if multiple sources, then only choose highest one
                 if not h or d.severity < h.severity then
-                    highest_severities[d.lnum] = d
+                    -- only show WARN and more severie diagnostics
+                    if d.severity <= vim.diagnostic.severity.WARN then
+                        highest_severities[d.lnum] = d
+                    end
                 end
             end
             local highest_severities_diagnostics = vim.tbl_values(highest_severities)
@@ -285,7 +290,7 @@ local function _config_diagnostics()
             --end,
             prefix = icons.misc.Dot,
             format = function(diagnostic)
-                return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.ui.Close,
+                return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.diagnostics.Debug,
                     diagnostic.message)
             end,
         }
