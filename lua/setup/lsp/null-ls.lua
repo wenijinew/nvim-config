@@ -148,13 +148,7 @@ function M.setup()
         capabilities = M.common_capabilities(),
         debug = false,
         sources = {
-            -- python formatting (install black by pip)
             null_ls.builtins.formatting.black.with({ extra_args = { "--fast", "-l", "79", "-t", "py311" } }),
-            -- python diagnostics (when pylsp is enabled, this is not needed)
-            -- null_ls.builtins.diagnostics.flake8.with({
-            --    diagnostics_format = "[#{c}] #{m} (#{s})",
-            -- }),
-            -- java formatting (check $WS_REPO_ROOT/bin/google_java_format)
             null_ls.builtins.formatting.google_java_format,
             null_ls.builtins.formatting.beautysh,
             null_ls.builtins.formatting.isort,

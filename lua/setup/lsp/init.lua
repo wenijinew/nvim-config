@@ -27,7 +27,7 @@ local log = require('utils.log')
 local servers = {
     jdtls = {},
     sumneko_lua = {},
-    pylsp = {}
+    pylsp = {},
 }
 
 function M.setup_document_symbols(client, bufnr)
