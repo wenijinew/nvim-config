@@ -59,5 +59,7 @@ require('setup.lualine').setup()
 require('setup.breadcrumbs').setup()
 require('setup.nvimtree').setup()
 require('setup.nvimcmp').setup()
+require('setup.treesitter').setup()
+
 -- require('setup.coc').setup()
 require('setup.colorizer').setup()
