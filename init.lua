@@ -59,7 +59,8 @@ require('setup.lualine').setup()
 require('setup.breadcrumbs').setup()
 require('setup.nvimtree').setup()
 require('setup.nvimcmp').setup()
-require('setup.treesitter').setup()
+-- dependent on npm, have to solve proxy/firewall issue before using it.
+-- require('setup.treesitter').setup()
 
 -- require('setup.coc').setup()
 require('setup.colorizer').setup()

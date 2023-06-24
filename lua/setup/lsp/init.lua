@@ -1,4 +1,3 @@
--- https://alpha2phi.medium.com/neovim-for-beginners-lsp-part-1-b3a17ddbe611#:~:text=Neovim%20supports%20the%20Language%20Server,are%20provided%20by%20third%20parties.
 local M = {}
 local log = require('utils.log')
 
@@ -51,6 +50,8 @@ function M.lsp_keymaps(bufnr)
     keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
     keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
     keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+    keymap(bufnr, "n", "gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+    keymap(bufnr, "n", "gn", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
     keymap(bufnr, "n", "<leader>lf", "<cmd>lua vim.lsp.buf.format{ async = true }<cr>", opts)
     keymap(bufnr, "n", "<leader>li", "<cmd>LspInfo<cr>", opts)
     keymap(bufnr, "n", "<leader>lI", "<cmd>LspInstallInfo<cr>", opts)

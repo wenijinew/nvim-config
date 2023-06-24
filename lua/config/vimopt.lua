@@ -150,6 +150,20 @@ local autocmds_definitions = {
             command = "GitGutterAll"
         }
     },
+    {
+        "CursorHold",
+        {
+            group = "_config_diagnostics",
+            pattern = { "*" },
+            desc = "Show diagnostics float",
+            callback = function()
+                vim.diagnostic.open_float({ format = function(diagnostic)
+                    return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.diagnostics.Debug,
+                        diagnostic.message)
+                end })
+            end
+        }
+    },
     -- the below code will cause highlight doesn't work after entering vim
     -- TODO: investigate the reason
     --{
@@ -199,6 +213,10 @@ local diagnostics_signs = {
     { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
     { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
     { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
+    { name = "DiagnosticSignError", text = icons.misc.Dot },
+    { name = "DiagnosticSignWarn", text = icons.misc.Dot },
+    { name = "DiagnosticSignHint", text = icons.misc.Dot },
+    { name = "DiagnosticSignInfo", text = icons.misc.Dot },
     -- here, it might not work, so we set the global symbols separately by
     -- vim.g.pymode_lint_todo_symbol and the similar
     -- see details in https://github.com/python-mode/python-mode/compare/develop...wenijinew:python-mode:e463652c
@@ -233,6 +251,8 @@ local function _show_highest_severity_diagnostics()
     local ns = vim.api.nvim_create_namespace("b.w")
     local orig_signs_handler = vim.diagnostic.handlers.signs
     local orig_virtual_text_handler = vim.diagnostic.handlers.virtual_text
+    -- only show severest diagnostics sign when multiple sources diagnostics
+    -- exist for the same line
     vim.diagnostic.handlers.signs = {
         show = function(_, bufnr, diagnostics, opts)
             local highest_severities = {}
@@ -250,6 +270,7 @@ local function _show_highest_severity_diagnostics()
             orig_signs_handler.hide(ns, bufnr)
         end
     }
+    -- only show ERROR or severier diagnostics virtual_text by default
     vim.diagnostic.handlers.virtual_text = {
         show = function(_, bufnr, diagnostics, opts)
             local highest_severities = {}
@@ -258,7 +279,7 @@ local function _show_highest_severity_diagnostics()
                 -- if multiple sources, then only choose highest one
                 if not h or d.severity < h.severity then
                     -- only show WARN and more severie diagnostics
-                    if d.severity <= vim.diagnostic.severity.WARN then
+                    if d.severity <= vim.diagnostic.severity.ERROR then
                         highest_severities[d.lnum] = d
                     end
                 end
@@ -293,8 +314,9 @@ local function _config_diagnostics()
                 return string.format("[%s] %s: %s", diagnostic.source, diagnostic.code or icons.diagnostics.Debug,
                     diagnostic.message)
             end,
-        }
+        },
     })
+    -- vim.api.nvim_command('autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float()')
 end
 
 local function _set_opts()
@@ -319,6 +341,7 @@ local function _set_opts()
     vim.opt.laststatus = 3
     vim.opt.tabstop = 4
     vim.opt.mod = true
+    vim.opt.ut = 1000
     -- colorscheme general settings
     vim.cmd('hi clear')
     vim.o.background = 'dark'
