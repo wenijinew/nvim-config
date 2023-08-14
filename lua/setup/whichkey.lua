@@ -251,10 +251,11 @@ local configuration = {
         },
         l = {
             name = "Code",
+            d = { "<cmd>lua vim.lsp.buf.definition({anync = true})<CR>", "Goto Definition" },
             f = { "<cmd>lua vim.lsp.buf.format({anync = true})<CR>", "Format Document" },
             r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
             a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-            d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
+            F = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
             i = { "<cmd>LspInfo<CR>", "LSP Infomation" }
         },
         g = {
