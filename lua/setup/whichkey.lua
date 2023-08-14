@@ -1,4 +1,5 @@
 local M = {}
+local log = require('utils.log')
 
 local configuration = {
     opts = {
@@ -183,6 +184,14 @@ local configuration = {
             --    vim.cmd("qa")
             --end, "Save session and Quit" }
             v = { function()
+                local buf_list = vim.api.nvim_list_bufs()
+                for _, bufnr in ipairs(buf_list) do
+                    if vim.api.nvim_buf_get_name(bufnr) == "" then
+                        -- If the buffer is unnamed, force delete it
+                        vim.api.nvim_buf_delete(bufnr, { force = true })
+                        log.warn(bufnr .. " is deleted.")
+                    end
+                end
                 vim.cmd("wa")
                 vim.cmd("mks! " .. vim.v.this_session)
                 vim.cmd("qa")
@@ -242,10 +251,11 @@ local configuration = {
         },
         l = {
             name = "Code",
+            d = { "<cmd>lua vim.lsp.buf.definition({anync = true})<CR>", "Goto Definition" },
             f = { "<cmd>lua vim.lsp.buf.format({anync = true})<CR>", "Format Document" },
             r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
             a = { "<cmd>lua vim.lsp.buf.code_action()<CR>", "Code Action" },
-            d = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
+            F = { "<cmd>lua vim.diagnostic.open_float()<CR>", "Line Diagnostics" },
             i = { "<cmd>LspInfo<CR>", "LSP Infomation" }
         },
         g = {

@@ -203,6 +203,33 @@ local autocmds_definitions = {
     --        end
     --    }
     --},
+    --
+    {
+        "VimLeavePre",
+        {
+            group = "_leave",
+            pattern = { "*" },
+            desc = "Cleanup before leaving",
+            callback = function()
+                local buf_list = vim.api.nvim_list_bufs()
+                for _, bufnr in ipairs(buf_list) do
+                    if vim.api.nvim_buf_get_name(bufnr) == "" then
+                        -- If the buffer is unnamed, force delete it
+                        vim.api.nvim_buf_delete(bufnr, { force = true })
+                        log.warn(bufnr .. " is deleted.")
+                    end
+                end
+                if vim.v.leaving then
+                    vim.api.nvim_echo("Hello, World!")
+                    log.info("Vi Ses! Sleep 10 seconds.")
+                    vim.cmd("sl 3")
+                else
+                    log.warn("Fix issues and then leave!")
+                end
+                vim.cmd("sl 3")
+            end
+        }
+    }
 }
 
 -- define diagnostics signs for default diagnostics names and python-mode

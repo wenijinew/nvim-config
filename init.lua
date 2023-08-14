@@ -52,6 +52,7 @@ require("setup.lsp").setup()
 --     }
 -- }
 require("setup.outline").setup()
+require("setup.trouble").setup()
 require("setup.gitsigns").setup()
 require('setup.whichkey').setup()
 require('setup.telescope').setup()
